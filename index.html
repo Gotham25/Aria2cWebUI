@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Aria2c manager</title>
+    <link type="text/css" rel="stylesheet" href="css/google-font-family-lato.css" />
+    <link type="text/css" rel="stylesheet" href="css/semantic.min.css" />
+    <link type="text/css" rel="stylesheet" href="css/toastr.min.css" />
+</head>
+
+<body class="index">
+
+    <div class="ui top attached demo menu">
+        <a class="item">
+            <i class="sidebar icon"></i> Menu
+        </a>
+    </div>
+    <div class="ui bottom attached segment">
+        <div class="ui dimmer" id="dimmer">
+            <div class="ui massive text loader">
+                <h3>Loading</h3>
+            </div>
+        </div>
+        <div class="ui inverted labeled icon left inline vertical demo sidebar menu">
+            <a class="item">
+                <i class="home icon"></i> Home
+            </a>
+            <a class="item">
+                <i class="download icon"></i> Active Downloads
+            </a>
+            <a class="item">
+                <i class="clock icon"></i> Waiting Downloads
+            </a>
+            <a class="item">
+                <i class="check circle icon"></i> Completed/Finished Downloads
+            </a>
+        </div>
+        <div class="pusher">
+            <div class="ui basic segment">
+
+                <div class="ui clearing segment right floated">Last updated: <span id="timeStamp"></span></div>
+                
+                <div id="appStatusSegment">
+                    <h3 class="ui header">Application Status</h3>
+                    <p>
+                        <div id="appStatus"></div>
+                    </p>
+                    <p>
+                        <button class="ui negative basic button" id="startStopDaemon">
+                            <i id="startStopDaemonIcon" class="stop icon"></i>
+                            <span id="startStopDaemonText">Stop</span>
+                        </button>
+                    </p>
+                    <p>
+                        <div id="aria2cOperations">
+                            <p>
+                                <button class="ui labeled icon button" id="addDownload">
+                                    <i class="plus icon"></i>
+                                    Add download
+                                </button>
+                            </p>
+                            <p>
+                                <button class="ui labeled icon button" id="downloadAria2cLog">
+                                    <i class="download icon"></i>
+                                    Download aria2c log
+                                </button>
+                            </p>
+                            <p>
+                                <table class="ui very basic collapsing celled table">
+                                    <thead>
+                                        <th>Aria2c Global setting fields</th>
+                                        <th>Values</th>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>allow-overwrite</td>
+                                            <td>
+                                                <div class="ui fitted slider checkbox">
+                                                    <input id="allowOverwrite" name="allowOverwrite" type="checkbox"><label></label>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>always-resume</td>
+                                            <td>
+                                                <div class="ui fitted slider checkbox">
+                                                    <input id="alwaysResume" name="alwaysResume" type="checkbox" checked="checked"><label></label>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>check-integrity</td>
+                                            <td>
+                                                <div class="ui fitted slider checkbox">
+                                                    <input id="checkIntegrity" name="checkIntegrity" type="checkbox" ><label></label>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>disable-ipv6</td>
+                                            <td>
+                                                <div class="ui fitted slider checkbox">
+                                                    <input id="disableIPv6" name="disableIPv6" type="checkbox" ><label></label>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>disk-cache</td>
+                                            <td>
+                                                <input id="diskCache" type="number" value="16777216" />
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>log-level</td>
+                                            <!-- debug, info, notice, error -->
+                                            <td>
+                                                <select id="logLevel" class="ui dropdown">
+                                                    <option value="info">info</option>
+                                                    <option value="debug">debug</option>
+                                                    <option value="notice">notice</option>
+                                                    <option value="error">error</option>
+                                                </select>
+
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>max-concurrent-downloads</td>
+                                            <td>
+                                                <input id="maxConcurrentDownloads" type="number" value="1" />
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>max-connection-per-server</td>
+                                            <td>
+                                                <input id="maxConnectionPerServer" type="number" value="1" />
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>max-download-limit</td>
+                                            <td>
+                                                <input id="maxDownloadLimit" type="number" value="0" />
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>max-download-result</td>
+                                            <td>
+                                                <input id="maxDownloadResult" type="number" value="1000" />
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>max-overall-download-limit</td>
+                                            <td>
+                                                <input id="maxOverallDownloadLimit" type="number" value="0" />
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>max-overall-upload-limit</td>
+                                            <td>
+                                                <input id="maxOverallUploadLlimit" type="number" value="0" />
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>max-resume-failure-tries</td>
+                                            <td>
+                                                <input id="maxResumeFailureTries" type="number" value="0" />
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>max-tries</td>
+                                            <td>
+                                                <input id="maxTries" type="number" value="5" />
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>max-upload-limit</td>
+                                            <td>
+                                                <input id="maxUploadLimit" type="number" value="0" />
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>min-split-size</td>
+                                            <td>
+                                                <input id="minSplitSize" type="number" value="20971520" />
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                    <tfoot>
+                                        <tr>
+                                            <td colspan="2" style="text-align: center;">
+                                                <button id="updateGlobalSettings" class="ui primary button">Update</button>
+                                            </td>
+                                        </tr>
+                                    </tfoot>
+                                </table>
+                            </p>
+                        </div>
+                    </p>
+                </div>
+
+                <div id="activeDownloadsSegment">
+                    <p>
+                        <div id="activeDownloadTable"></div>
+                    </p>
+                </div>
+
+                <div id="waitingDownloadsSegment">
+                    <p>
+                        <div id="waitingDownloadTable"></div>
+                    </p>
+                </div>
+
+                <div id="completedOrFinishedDownloadsSegment">
+                    <p>
+                        <div id="completedOrFinishedDownloadTable"></div>
+                    </p>
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+
+    <div class="ui dimmer modals page transition hidden">
+        <div class="ui fullscreen modal scrolling transition hidden">
+            <i class="close icon"></i>
+            <div class="header">
+                Add downloads
+            </div>
+            <div class="content">
+                <div class="ui form">
+                    <div class="field">
+                        <label>URI</label>
+                        <textarea id="addDownloadsTextArea" placeholder="Enter one URL per line"></textarea>
+                    </div>
+                </div>
+            </div>
+            <div class="actions">
+                <div class="ui green button approve">Add</div>
+            </div>
+        </div>
+    </div>
+
+
+    <script type="text/javascript" src="js/jquery-3.4.1.js"></script>
+    <script type="text/javascript" src="js/semantic.min.js"></script>
+    <script type="text/javascript" src="js/toastr.min.js"></script>
+    <script type="text/javascript" src="js/app.js"></script>
+</body>
+
+</html>
