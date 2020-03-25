@@ -139,7 +139,7 @@
             case "WINNT":
             case "Windows":
                             //start script for windows
-                            $handle = popen("START /B aria2c.exe --enable-rpc --rpc-listen-all --max-connection-per-server=1 --max-concurrent-downloads=1 --log=aria2c.log >NUL 2>&1", "r");
+                            $handle = popen("START /B aria2c.exe --enable-rpc --rpc-listen-all --max-connection-per-server=16 --max-concurrent-downloads=16 --log=aria2c.log >NUL 2>&1", "r");
                             pclose($handle);
                             return getAria2cDaemonStatus();
                             break;
@@ -149,7 +149,7 @@
             case "Unix":
             case "Linux":
                             //start script for Unix/Linux
-                            shell_exec("nohup ./aria2c --enable-rpc --rpc-listen-all --max-connection-per-server=1 --max-concurrent-downloads=1 --log=aria2c.log > /dev/null 2>&1 &");
+                            shell_exec("nohup ./aria2c --enable-rpc --rpc-listen-all --max-connection-per-server=16 --max-concurrent-downloads=16 --log=aria2c.log > /dev/null 2>&1 &");
                             return getAria2cDaemonStatus();
                             break;
             default:        

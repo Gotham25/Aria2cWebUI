@@ -7,6 +7,9 @@ let daemonStatusCheckInterval = 0;
 let activeDownloadInterval = 0;
 let waitingDownloadInterval = 0;
 let completedOrFinishedDownloadInterval = 0;
+const ACTIVE_DOWNLOAD_TIMEOUT = 5000;
+const WAITING_DOWNLOAD_TIMEOUT = 5000;
+const COMPLETED_DOWNLOAD_TIMEOUT = 5000;
 
 $.fn.toggleStartStopButton = function (enabledSelector, disabledSelector) {
   $(enabledSelector).attr("disabled", true);
@@ -387,7 +390,7 @@ $(document).ready(function () {
               $("#dimmer").toggleState();
               isFirstTimeActive = false;
             }
-          }, 5000);
+          }, ACTIVE_DOWNLOAD_TIMEOUT);
         }
         break;
       case "Waiting Downloads": console.log("Waiting Downloads clicked"); showSegment("waitingDownloadsSegment");
@@ -399,7 +402,7 @@ $(document).ready(function () {
               $("#dimmer").toggleState();
               isFirstTimeWaiting = false;
             }
-          }, 5000);
+          }, WAITING_DOWNLOAD_TIMEOUT);
         }
         break;
       case "Completed/Finished Downloads": console.log("History clicked"); showSegment("completedOrFinishedDownloadsSegment");
@@ -411,7 +414,7 @@ $(document).ready(function () {
               $("#dimmer").toggleState();
               isFirstTimeCompletedOrFinished = false;
             }
-          }, 15000);
+          }, COMPLETED_DOWNLOAD_TIMEOUT);
         }
         break;
       default: console.log("Click action not configured for menu, " + currentTarget.innerText);
@@ -442,6 +445,7 @@ $(document).ready(function () {
   });
 
   $("#addDownload").click(function (e) {
+    $("#addDownloadsTextArea").val("");
     $('.fullscreen.modal')
         .modal({
           closable: false,
