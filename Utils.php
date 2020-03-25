@@ -1850,6 +1850,9 @@ function getContentTypeFromFileType($fileType)
         case "tei":
             return "application/tei+xml";
             break;
+        case "log":
+            return "text/plain";
+            break;
         case "txt":
             return "text/plain";
             break;

@@ -7,21 +7,6 @@
 
     $aria2c = new Aria2('http://127.0.0.1:6800/jsonrpc');
 
-    // try {
-    //     $gid = $aria2c->addUri(
-    //         ['http://localhost/Darbar.mp4'],
-    //         ['dir'=>'C:\wamp64\www\tmp']
-    //     );
-    //     echo PHP_EOL."gid:";
-    //     var_dump($gid);
-    //     echo PHP_EOL.PHP_EOL;
-    //     $globalStat = $aria2c->getGlobalStat();
-    //     var_dump($globalStat);
-    // } catch (\Exception $e) {
-    //     echo PHP_EOL."Error: " . $e->getMessage().PHP_EOL.PHP_EOL;
-    //     var_dump($e);
-    // }
-
     try {
         if ($_SERVER["REQUEST_METHOD"] != "POST") {
             die("Invalid script execution");

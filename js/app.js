@@ -1,13 +1,4 @@
 
-// document.addEventListener('DOMContentLoaded', function() {
-//     let elems = document.querySelectorAll(".sidenav");
-//     let options = {
-//         // "edge": "right",
-//         // "draggable": false
-//     };
-//     var instances = M.Sidenav.init(elems, options)
-// });
-
 const BASE_URI = window.location.origin; //"http://localhost/Aria2c-PHP-webui";
 
 const ABSOLUTE_RESOURCE_PATH = BASE_URI + "/aria2cManager.php";
