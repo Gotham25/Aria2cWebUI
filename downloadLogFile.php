@@ -1,6 +1,7 @@
 <?php
 
 require_once("Utils.php");
+require_once("Constants.php");
 
 $logFileName = $_GET['logFileName'];
 $fileType = $_GET['fileType'];
@@ -14,19 +15,12 @@ $contentType = getContentTypeFromFileType($fileType);
 $filename = "$logFileName.$fileType";
 
 $absoluteFilePath = getcwd();
-$tmp1=getcwd();
-$tmp2="";
 if ($logFileName != "aria2c") {
-    $absoluteFilePath .= (DIRECTORY_SEPARATOR . ".." . DIRECTORY_SEPARATOR . "downloads");
-    $tmp2=(DIRECTORY_SEPARATOR . ".." . DIRECTORY_SEPARATOR . "downloads");
+    $absoluteFilePath = DOWNLOAD_DIRECTORY;
 }
 $absoluteFilePath .= (DIRECTORY_SEPARATOR . $filename);
-$tmp3 = (DIRECTORY_SEPARATOR . $filename);
-
-$absoluteFilePath = realpath($absoluteFilePath);
 
 echo "<br />absoluteFilePath: $absoluteFilePath<br />filename: $filename<br />logFileName: $logFileName<br />fileType: $fileType<br />";
-echo "<br />tmp1: $tmp1<br />tmp2: $tmp2<br />tmp3: $tmp3<br />";
 
 // // http headers for log file downloads
 // header("Pragma: public");
