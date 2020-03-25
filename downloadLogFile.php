@@ -20,7 +20,7 @@ if ($logFileName != "aria2c") {
 }
 $absoluteFilePath .= (DIRECTORY_SEPARATOR . $filename);
 
-echo "<br />absoluteFilePath: $absoluteFilePath<br />filename: $filename<br />logFileName: $logFileName<br />fileType: $fileType<br />";
+echo "<br />contentType: $contentType<br />";
 
 // // http headers for log file downloads
 // header("Pragma: public");
