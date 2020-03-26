@@ -161,6 +161,18 @@ $(document).ready(function () {
       "json"
     );
   }
+  
+  function formatBytes(bytes, decimals = 2) {
+    if (bytes === 0) return '0 Bytes';
+    
+    const k = 1024;
+    const dm = decimals < 0 ? 0 : decimals;
+    const sizes = ['Bytes', 'KB', 'MB', 'GB', 'TB', 'PB', 'EB', 'ZB', 'YB'];
+    
+    const i = Math.floor(Math.log(bytes) / Math.log(k));
+    
+    return parseFloat((bytes / Math.pow(k, i)).toFixed(dm)) + ' ' + sizes[i];
+}
 
   function getProgressBar(percent) {
 
@@ -263,12 +275,12 @@ $(document).ready(function () {
       downloadItemDetails.push(activeDownloadItem.dir);
       downloadItemDetails.push(activeDownloadItem.connections);
       downloadItemDetails.push(activeDownloadItem.numPieces);
-      downloadItemDetails.push(activeDownloadItem.pieceLength);
-      downloadItemDetails.push(activeDownloadItem.downloadSpeed);
-      downloadItemDetails.push(totalLength);
-      downloadItemDetails.push(completedLength);
-      downloadItemDetails.push(activeDownloadItem.uploadLength);
-      downloadItemDetails.push(activeDownloadItem.uploadSpeed);
+      downloadItemDetails.push(formatBytes(activeDownloadItem.pieceLength, 3));
+      downloadItemDetails.push(formatBytes(activeDownloadItem.downloadSpeed, 3));
+      downloadItemDetails.push(formatBytes(totalLength, 3));
+      downloadItemDetails.push(formatBytes(completedLength, 3));
+      downloadItemDetails.push(formatBytes(activeDownloadItem.uploadLength, 3));
+      downloadItemDetails.push(formatBytes(activeDownloadItem.uploadSpeed, 3));
       tableData.push(downloadItemDetails);
     });
 
